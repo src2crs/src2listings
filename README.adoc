@@ -1,0 +1,4 @@
+# Src2Listings
+
+This repo contains a LaTeX package that is used for displaying code listings
+in documents for programming courses (e.g. slides, tasks, exams, etc.).
