@@ -1,0 +1,46 @@
+\documentclass{scrartcl}
+
+\usepackage[lang=go]{../../packages/src2listings}
+\input{../tcbstyles}
+
+\title{Listing Examples}
+\author{Reiner Hüchting}
+
+\begin{document}
+    
+\section*{Listings using the standard \code{listings} package}
+
+The \code{src2listings} package defines a default style for use with the \code{listings} package.
+The style is called \code{defaultlistingstyle} and can be used as follows:
+
+\begin{tcblisting}{texcode, title = A \code{Go} function with \code{defaultlistingstyle}}
+    \begin{lstlisting}[style=defaultlistingstyle]
+        func Greet() {
+            fmt.Println("Hello World!")
+        }
+    \end{lstlisting}
+\end{tcblisting}
+
+\section*{Listings using the \code{src2listing} environment}
+
+There is an environment called \code{src2listing} that uses the
+\code{defaultlistingstyle} by default:
+
+\begin{tcblisting}{texcode, title = The same \code{Go} function with \code{src2listing}}
+    \begin{src2listing}[title = Greet function in \code{Go}]
+func Greet() {
+    fmt.Println("Hello World!")
+}
+    \end{src2listing}
+\end{tcblisting}
+
+\section*{Listings using the \code{inputsrcfile} command}
+
+The \code{inputsrcfile} command can be used to include a source file
+into the document. The file is included using the \code{defaultlistingstyle}:
+
+\begin{tcblisting}{texcode, title = A \code{Python} file with \code{inputsrcfile}}
+    \inputsrcfile[language=python][title = Complicated \code{python} script]{example1.py}
+\end{tcblisting}
+
+\end{document}

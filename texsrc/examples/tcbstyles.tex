@@ -1,0 +1,24 @@
+% This file provides styles for writing the example files
+% for the LaTeX packages in Src2Crs.
+
+% required packages
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable}
+\tcbuselibrary{listingsutf8}
+\tcbuselibrary{skins}
+
+% an environment for typesetting latex listings
+% usage: \begin{texcode}{<title>}...\end{texcode}
+
+\tcbset{
+    texcode/.style={
+        enhanced,
+        breakable,
+        title={#1},
+        colback=white!10,
+        colframe=black!40,
+        listing options={
+            style=tcblatex,
+        }
+    }
+}

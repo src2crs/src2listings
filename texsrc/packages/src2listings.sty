@@ -1,0 +1,95 @@
+% Declare the package
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{src2listings}[2023/11/12 v0.0.1 Src2Listings]
+
+% required packages
+\RequirePackage{tcolorbox}
+\tcbuselibrary{breakable}
+\tcbuselibrary{listingsutf8}
+\tcbuselibrary{skins}
+\RequirePackage{lstautogobble}
+
+\RequirePackage{expl3}
+
+% package options
+
+\DeclareKeys
+  {
+    % Allows the user to specify a programming language in the form [lang=<lang>].
+    % This language will be used in source listings by default.
+    % There is no check whether the language is supported by the listings package.
+    lang   .tl_set:N         = \srccrs@defaultlang,
+    lang   .initial:n        = go,
+    lang   .value_required:n = false,
+
+    % print a warning for unknown options
+    unknown .code:n           =
+      \PackageWarning{mytheorem}{Unknown~ option~ `\l_keys_key_str'},
+  }
+
+\ProcessKeyOptions\relax
+
+% default style for the listing environment
+\lstdefinestyle{defaultlistingstyle}{
+    autogobble=true,
+    language=\srccrs@defaultlang,
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape,
+    showstringspaces=false,
+    breaklines=true,
+    breakatwhitespace=true,
+    tabsize=4,
+    frame=hidden,
+    captionpos=b,
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    xleftmargin=0.5cm,
+    xrightmargin=0.5cm,
+    aboveskip=0.5cm,
+    belowskip=0.5cm,
+}
+
+% style for source code listing boxes
+\tcbset{
+    src2listing/.style={
+        enhanced,
+        breakable,
+        listing only,
+        colback=black!2!white,
+        colframe=black!2!white,
+        sharp corners,
+    },
+}
+
+% an environment for typesetting source code listings
+% usage: \begin{src2listing}[<listing options>][<tcb options>]...\end{src2listing}
+\NewTCBListing{src2listing}{ O{} O{} }{
+    src2listing,
+    listing options={
+        style=defaultlistingstyle,
+        #1,
+    },
+    #2,
+}
+
+% macro for inserting a listing from a file
+% usage: \inputsrcfile[<listing options>][<tcb options>]{<filename>}
+\NewTCBInputListing{\inputsrcfile}{ O{} O{} m }{
+    src2listing,
+    listing options={
+        style=defaultlistingstyle,
+        #1,
+    },
+    listing file={#3},
+    #2,
+}
+
+% macro for an inline listing
+% meant for typesetting single keywords, variable/function names, etc.
+% 
+% usage: \code[<listing options>]{code}
+\NewDocumentCommand{\code}{ O{} m }{%
+    \lstinline[style=defaultlistingstyle,#1]!#2!%
+}
