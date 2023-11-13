@@ -94,3 +94,14 @@
 \NewDocumentCommand{\code}{ O{} m }{%
     \lstinline[style=defaultlistingstyle,#1]!#2!%
 }
+
+% macro for inserting a listing from a file using a function marker that is in the code.
+% usage: \inputsrcfilerange[<listing options>][<tcb options>][<marker>]{<filename>}
+\NewDocumentCommand{\inputsrcfilemarker}{ O{} O{} m m }{
+    \inputsrcfile[%
+        rangeprefix=//\ ,%
+        includerangemarker=false,%
+        linerange={{begin:#3}-{end:#3}},%
+        #1,%
+    ][#2]{#4}%
+}
