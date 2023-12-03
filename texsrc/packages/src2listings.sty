@@ -52,7 +52,14 @@
     belowskip=0.5cm,
 }
 
-% style for source code listing boxes
+% style for small listings
+\lstdefinestyle{compact}{
+    style=defaultlistingstyle,
+    basicstyle=\ttfamily\footnotesize,
+    numbers=none,
+}
+
+% styles for source code listing boxes
 \tcbset{
     src2listing/.style={
         enhanced,
@@ -61,6 +68,13 @@
         colback=black!2!white,
         colframe=black!2!white,
         sharp corners,
+    },
+}
+
+\tcbset{
+    compact/.style={
+        before upper = \vspace*{-2em}, % TODO: calculate?
+        after upper = \vspace*{-2em}, % TODO: calculate?
     },
 }
 
