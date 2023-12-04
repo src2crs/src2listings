@@ -65,16 +65,19 @@
         enhanced,
         breakable,
         listing only,
-        colback=black!2!white,
-        colframe=black!2!white,
-        sharp corners,
+        colback=yellow!10!white,
+        colframe=yellow!10!white,
+        before upper = \vspace*{-2em}, % TODO: calculate?
+        after upper = \vspace*{-2em}, % TODO: calculate?
     },
 }
 
+% styles for source code listing boxes
 \tcbset{
-    compact/.style={
-        before upper = \vspace*{-2em}, % TODO: calculate?
-        after upper = \vspace*{-2em}, % TODO: calculate?
+    src2listingbw/.style={
+        src2listing,
+        colback=black!2!white,
+        colframe=black!2!white,
     },
 }
 
